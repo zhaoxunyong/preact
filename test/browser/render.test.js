@@ -427,7 +427,11 @@ describe('render()', () => {
 			});
 
 			it('should not add "px" suffix for custom properties', () => {
+				// eslint-disable-next-line no-console
+				console.log((<div style={{ '--foo': 2, animationDelay: 'calc(var(--foo) * 20ms)' }}>test</div>).props);
 				render(<div style={{ '--foo': 2, animationDelay: 'calc(var(--foo) * 20ms)' }}>test</div>, scratch);
+				// eslint-disable-next-line no-console
+				console.log(scratch.firstChild.style.cssText, 'sorted',sortCss(scratch.firstChild.style.cssText) );
 				expect(sortCss(scratch.firstChild.style.cssText)).to.equal('--foo: 2; animation-delay: calc(var(--foo) * 20ms);');
 			});
 		}
